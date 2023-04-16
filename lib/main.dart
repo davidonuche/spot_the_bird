@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spot_the_bird/bloc/bird_post_cubit.dart';
 import 'package:spot_the_bird/bloc/location_cubit.dart';
 import 'package:spot_the_bird/screens/map_screen.dart';
 
@@ -15,8 +16,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LocationCubit>(
-      create: (context) => LocationCubit()..getLocation(),
+    return MultiBlocProvider(providers: [
+      BlocProvider<LocationCubit>(
+      create: (context) => LocationCubit()..getLocation(),),
+      BlocProvider<BirdPostCubit>(create: (context) => BirdPostCubit(),)
+    ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
