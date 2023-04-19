@@ -10,7 +10,9 @@ class BirdPostCubit extends Cubit<BirdPostState> {
           status: BirdPostStatus.initial,
         ));
   void addBirdPost(BirdModel birdModel) {
-    List<BirdModel> posts = state.birdPosts;
+    emit(state.copyWith(status: BirdPostStatus.loading));
+    List<BirdModel> posts = [];
+    posts.addAll(state.birdPosts);
     posts.add(birdModel);
     emit(state.copyWith(birdPosts: posts, status: BirdPostStatus.postAdded));
   }
