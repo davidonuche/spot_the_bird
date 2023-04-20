@@ -2,7 +2,7 @@ part of 'bird_post_cubit.dart';
 
 
 
-enum BirdPostStatus { initial, error, loading, postAdded}
+enum BirdPostStatus { initial, error, loading, postAdded, postRemoved}
 
 class BirdPostState extends Equatable {
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spot_the_bird/models/bird_model.dart';
+
+import '../bloc/bird_post_cubit.dart';
 
 class BirdInfoScreen extends StatelessWidget {
   final BirdModel birdModel;
@@ -24,13 +27,25 @@ class BirdInfoScreen extends StatelessWidget {
           SizedBox(height: 7),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(birdModel.birdName, style: Theme.of(context).textTheme.headlineSmall,),
+            child: Text(
+              birdModel.birdName,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
-            child: Text(birdModel.birdDescription, style: Theme.of(context).textTheme.headlineSmall,),
+            child: Text(
+              birdModel.birdDescription,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
-          ElevatedButton(onPressed: null, child: Text("Delete"))
+          ElevatedButton(
+            onPressed: () {
+              context.read<BirdPostCubit>().deletePost(birdModel);
+              Navigator.of(context).pop();
+            },
+            child: Text("Delete"),
+          ),
         ],
       ),
     );
