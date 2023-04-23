@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spot_the_bird/models/bird_model.dart';
-
 import '../bloc/bird_post_cubit.dart';
+
 
 class BirdInfoScreen extends StatelessWidget {
   final BirdModel birdModel;

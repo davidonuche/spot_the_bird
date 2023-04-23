@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:spot_the_bird/bloc/bird_post_cubit.dart';
 import 'package:spot_the_bird/models/bird_model.dart';
+import 'package:spot_the_bird/services/database_helper.dart';
 
 class AddBirdScreen extends StatefulWidget {
   final File image;

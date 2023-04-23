@@ -6,6 +6,8 @@ class BirdModel {
   double latitude;
   double longtitude;
   File image;
+  /// Id of the bird post to be used in SQL Table.
+  int? id;
 
   BirdModel({
     required this.birdName,
@@ -13,5 +15,6 @@ class BirdModel {
     required this.latitude,
     required this.longtitude,
     required this.image,
+    this.id,
   });
 }
