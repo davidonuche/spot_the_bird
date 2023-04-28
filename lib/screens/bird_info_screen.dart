@@ -3,13 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spot_the_bird/models/bird_model.dart';
 import '../bloc/bird_post_cubit.dart';
 
-
 class BirdInfoScreen extends StatelessWidget {
-  final BirdModel birdModel;
-  const BirdInfoScreen({required this.birdModel, super.key});
+  static const String routeName = "/bird_info_screen";
+  // final BirdModel birdModel;
+  // const BirdInfoScreen({required this.birdModel, super.key});
 
   @override
   Widget build(BuildContext context) {
+    final BirdModel birdModel =
+        ModalRoute.of(context)!.settings.arguments as BirdModel;
     return Scaffold(
       appBar: AppBar(
         title: Text(birdModel.birdName),

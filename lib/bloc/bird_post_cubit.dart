@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -8,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_the_bird/models/bird_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:spot_the_bird/services/database_helper.dart';
-import 'dart:developer';
 part 'bird_post_state.dart';
 
 class BirdPostCubit extends Cubit<BirdPostState> {
@@ -55,8 +53,6 @@ class BirdPostCubit extends Cubit<BirdPostState> {
 
   Future<void> addBirdPost(BirdModel birdModel) async {
     emit(state.copyWith(status: BirdPostStatus.loading));
-
-    // TODO:- Add to SQL Table
     // Convert file to Uint8List
     Uint8List bytes = birdModel.image.readAsBytesSync();
     Map<String, dynamic> row = {

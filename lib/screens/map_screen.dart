@@ -6,9 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:spot_the_bird/bloc/bird_post_cubit.dart';
 import 'package:spot_the_bird/bloc/location_cubit.dart';
+import 'package:spot_the_bird/screens/bird_info_screen.dart';
 
 import 'add_bird_screen.dart';
-import 'bird_info_screen.dart';
 
 class MapScreen extends StatelessWidget {
   MapScreen({super.key});
@@ -23,15 +23,18 @@ class MapScreen extends StatelessWidget {
         source: ImageSource.gallery, imageQuality: 40);
     if (pickedImage != null) {
       image = File(pickedImage.path);
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => AddBirdScreen(
-            image: image!,
-            latLng: latLng,
-          ),
-        ),
-      );
-      // Push to add bird screen
+      Navigator.of(context).pushNamed(AddBirdScreen.routeName, arguments: {
+        "LatLng" : latLng,
+        "image" : image,
+      });
+      // Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     builder: (context) => AddBirdScreen(
+      //       image: image!,
+      //       latLng: latLng,
+      //     ),
+      //   ),
+      // );
     } else {
       print("No image selected");
     }
@@ -85,39 +88,14 @@ class MapScreen extends StatelessWidget {
                         height: 55,
                         point: LatLng(post.latitude, post.longtitude),
                         builder: (context) => GestureDetector(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  BirdInfoScreen(birdModel: post),
-                            ),
-                          ),
+                          onTap: () => Navigator.of(context)
+                              .pushNamed(BirdInfoScreen.routeName, arguments: post),
                           child: Image.asset("assets/bird_icon.png"),
                         ),
                       ),
                     )
                     .toList(),
               ),
-              // MarkerLayerOptions(
-              //   // markers: _buildMarkers(birdPostState..birdPosts),
-              //   markers: birdPostState.birdPosts
-              //       .map(
-              //         (post) => Marker(
-              //           width: 55,
-              //           height: 55,
-              //           point: LatLng(post.latitude, post.longtitude),
-              //           builder: (context) => GestureDetector(
-              //             onTap: () => Navigator.of(context).push(
-              //               MaterialPageRoute(
-              //                 builder: (context) =>
-              //                     BirdInfoScreen(birdModel: post),
-              //               ),
-              //             ),
-              //             child: Image.asset("assets/bird_icon.png"),
-              //           ),
-              //         ),
-              //       )
-              //       .toList(),
-              // ),
             ],
           ),
         ),
