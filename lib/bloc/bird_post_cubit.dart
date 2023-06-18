@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_the_bird/models/bird_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:spot_the_bird/services/database_helper.dart';
@@ -76,20 +74,5 @@ class BirdPostCubit extends Cubit<BirdPostState> {
     posts.remove(birdModel);
     _dbHelper.delete(birdModel.id!);
     emit(state.copyWith(birdPosts: posts, status: BirdPostStatus.postRemoved));
-  }
-
-  Future<void> _saveToSharedPrefs(List<BirdModel> posts) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> jsonDataList = posts
-        .map((post) => json.encode({
-              "birdName": post.birdName,
-              "birdDescription": post.birdDescription,
-              "latitude": post.latitude,
-              "longtitude": post.longtitude,
-              "filePath": post.image.path,
-            }))
-        .toList();
-
-    prefs.setStringList("birdPosts", jsonDataList);
   }
 }
